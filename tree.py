@@ -19,7 +19,7 @@ def gini_index(dane_frame, cecha : str):
         rows = dataframe.shape[0]
 
         sum_edible = (dataframe['class'] == 'e').sum()
-        sum_poisonous = (dataframe['class'] == 'f').sum()
+        sum_poisonous = (dataframe['class'] == 'p').sum()
 
         g = 1 - pow(sum_edible/rows, 2) - pow(sum_poisonous/rows, 2)
         w = rows/n
