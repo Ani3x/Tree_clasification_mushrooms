@@ -4,9 +4,9 @@ import pandas as pd
 
 class Node:
     def __init__(self, feature=None, children=None, label=None):
-        self.feature = feature        # cecha do podziału
+        self.feature = feature # cecha do podziału
         self.children = children or {}  # dict: wartość -> Node
-        self.label = label            # jeśli liść
+        self.label = label # jeśli liść
 
 
 def gini_index(dane_frame, cecha : str):
@@ -30,7 +30,7 @@ def gini_index(dane_frame, cecha : str):
 
 def best_feature(df, features):
     best = None
-    best_gini = float('inf')
+    best_gini = float('inf') # Pozytywna nieskończoność, bo index giniego ma być jak najmniejszy
 
     for feature in features:
         g = gini_index(df, feature)[0]
@@ -50,11 +50,11 @@ def predict(node, sample):
     if value in node.children:
         return predict(node.children[value], sample)
     else:
-        return None  # albo fallback
+        return None
     
 
-def build_tree(df, features, depth=0, max_depth=5):
-    # jeśli wszystkie klasy takie same → liść
+def build_tree(df, features, depth=0, max_depth=10):
+    # jeśli wszystkie klasy takie same, to liść
     if len(df['class'].unique()) == 1:
         return Node(label=df['class'].iloc[0])
 
